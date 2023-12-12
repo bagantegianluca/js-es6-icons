@@ -129,9 +129,8 @@ const icons = [
     }
 ];
 
-
-// Select col div
-const colElement = document.querySelector('.col');
+// Select row div
+const rowElement = document.querySelector('.row');
 
 // Creare a card for each object of the array
 icons.forEach((icon) => createCard(icon));
@@ -149,23 +148,31 @@ icons.forEach((icon) => createCard(icon));
  */
 function createCard(object) {
 
-    // Create a const with children tags
-    const cardChildrenTags = `
-    <i style="color: ${object.color}" class="${object.prefix}solid ${object.prefix}${object.name}"></i>
-<div class="card-body">
-    <h5 class="card-title">${object.name}</h5>
-    <p class="card-text">This is the ${object.name} and it should be ${object.color}</p>
-</div>`
+    // Create col div
+    const colElement = document.createElement('div');
+
+    colElement.classList.add('col-3');
 
     // Create cardElement
     const cardElement = document.createElement('div');
 
     // Add class to card element
-    cardElement.className = 'card text-center';
+    cardElement.className = 'card text-center h-100';
+
+    // Create a const with children tags
+    const cardChildrenTags = `
+    <i style="color: ${object.color}" class="${object.prefix}solid ${object.prefix}${object.name} p-3"></i>
+    <div class="card-body">
+        <h5 class="card-title">${object.name}</h5>
+        <p class="card-text">This is the ${object.name} and it should be ${object.color}</p>
+    </div>`
 
     // Append cardChildrenTags to cardElement
     cardElement.insertAdjacentHTML('beforeend', cardChildrenTags);
 
     // Append cardElement to colElement
     colElement.appendChild(cardElement);
+
+    // Append colElement to rowElement
+    rowElement.appendChild(colElement);
 }
