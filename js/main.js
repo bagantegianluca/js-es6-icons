@@ -132,10 +132,28 @@ const icons = [
 // Select row div
 const rowElement = document.querySelector('.row');
 
-// Creare a card for each object of the array
+// Select select element
+const selectElement = document.querySelector('select');
+
+// Add an eventListener at select chaning value to filter the objects array
+selectElement.addEventListener('change', function () {
+
+    // Clean rowElement
+    rowElement.innerHTML = '';
+
+    // Keep the filter value in a variable
+    const filteredValue = this.value;
+
+    // Assign to filteredIcon the value to filter
+    const filteredIcons = filteredValue !== 'all' ? icons.filter(icon => icon.type === filteredValue) : icons;
+
+    // Generate cards for filteredIcons
+    filteredIcons.forEach((icon) => createCard(icon));
+
+})
+
+// Create a card for each object of the array
 icons.forEach((icon) => createCard(icon));
-
-
 
 //-----------//
 // Functions //
